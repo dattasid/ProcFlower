@@ -1,0 +1,63 @@
+<html>
+<style type="text/css">
+body {
+  color:white;
+  background:black;
+}
+#progress {
+  color: white;
+}
+.complete {
+  color: lightgreen !important;
+}
+input{
+  background-color: grey;
+  color:white;
+}
+</style>
+<script>
+function downloadPNG(){
+    
+    //document.getElementById("downloader").download = "?.png";
+    document.getElementById("downloader").href = document.getElementById("canvas2").toDataURL("image/png").replace(/^data:image\/[^;]/, 'data:application/octet-stream');
+    //console.log(document.getElementById("downloader").href)
+}
+
+function doAll()
+{
+  document.getElementById("progress").classList.remove("complete")
+  let w = (document.getElementById("p_width")).value
+  let h = (document.getElementById("p_height")).value
+  let sm = (document.getElementById("p_smooth")).checked
+  console.log(w+" "+h+" "+sm)
+
+  window["make_all_flowers"](Number(w), Number(h), sm)
+}
+</script>
+<body>
+
+<!--svg width="800" height="800" id="canvas">
+</svg-->
+
+<!-- target for the SVG -->
+<!--div id="canvas"></div-->
+<span id="canvas"></span>
+
+<canvas id="canvas2" style="border:2px solid black;" width="1200" height="800">
+</canvas>
+
+
+<br/><br/>
+Width<input type="number" id="p_width" value="1200"/> Height<input type="number" id="p_height" value="800">
+<input type="checkbox" id="p_smooth"/><label for="smooth">Smooth shading (SLOW)</label><br/>
+
+<button type="button" onclick="doAll()" style="margin-top: 10px;">New!</button>
+<a href="#" id="downloader" download="flowers.png" ><button type="button" onclick="downloadPNG()">Download PNG</button></a>
+
+<span id="progress">Progress: 0</span>
+
+<p id="footer" style="font-size:80%; color:white;">(C) Sid Datta. Downloaded image may be considered under Creative Commons with Attribution.</p>
+<span id="debug"></span>
+</body>
+<script data-main="summer_flowers" src="require.js"></script>
+</html>
